@@ -1,0 +1,29 @@
+auto lo
+iface lo inet loopback
+# enp6s0 is the physical network interface
+auto enp6s0
+iface enp6s0 inet manual
+
+# you create 2 bridges
+
+# vmbr0 is bridged to the enp6s0 interface, you need to tell the dhcp server to set ip for this interface
+
+auto vmbr0
+iface vmbr0 inet static
+        address 192.168.x.x/24
+        gateway 192.168.x.x
+        bridge-ports enp6s0
+        bridge-stp off
+        bridge-fd 0
+
+# below is the private network for vms, vmbr1 is not bridged to any interface
+auto vmbr1
+iface vmbr1 inet static
+        address 10.0.4.1/24
+        bridge-ports none
+        bridge-stp off
+        bridge-fd 0
+        post-up   echo 1 > /proc/sys/net/ipv4/ip_forward
+        post-up   iptables -t nat -A POSTROUTING -s '10.0.4.0/24' -o vmbr0 -j MASQUERADE
+        post-down iptables -t nat -D POSTROUTING -s '10.0.4.0/24' -o vmbr0 -j MASQUERADE
+
