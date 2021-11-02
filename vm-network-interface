@@ -1,3 +1,5 @@
+# this is the /etc/sysconfig/network-scripts/ifcfg-ens18 file in the guest vm
+
 TYPE=Ethernet
 PROXY_METHOD=none
 BROWSER_ONLY=no
