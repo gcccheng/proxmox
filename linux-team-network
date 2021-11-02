@@ -1,0 +1,22 @@
+# create a team connection which combines two network
+# /etc/sysconfig/network-scripts/ifcfg-team0
+
+TEAM_CONFIG="{\"runner\":{\"name\":\"activebackup\"}}"
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=none
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=team0
+UUID=3ba208e7-44c9-482a-92ad-7d6e67bacaaa
+DEVICE=team0
+ONBOOT=yes
+DEVICETYPE=Team
+IPADDR=10.0.x.x
+PREFIX=24
+
